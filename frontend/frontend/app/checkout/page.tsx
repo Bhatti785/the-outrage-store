@@ -29,7 +29,6 @@ export default function CheckoutPage() {
   const [shippingCost, setShippingCost] = useState(200)
   const [uploading, setUploading] = useState(false)
 
-  // Shipping logic
   useEffect(() => {
     setShippingCost(cartTotal > 5000 ? 0 : 200)
   }, [cartTotal])
@@ -41,15 +40,14 @@ export default function CheckoutPage() {
     iban: "PK36HBL0000001234567890"
   }
 
-  // ✅ FIXED TYPE
+  // ✅ FIXED
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
 
     setUploading(true)
-
     try {
-      const data = new FormData() // ✅ FIXED NAME
+      const data = new FormData()
       data.append('file', file)
       data.append('upload_preset', 'products')
 
@@ -71,12 +69,12 @@ export default function CheckoutPage() {
     }
   }
 
-  // ✅ FIXED TYPE
+  // ✅ FIXED
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!user) {
-      toast.error('Login required')
+      toast.error('Please login')
       router.push('/login')
       return
     }
@@ -137,16 +135,11 @@ export default function CheckoutPage() {
     }
   }
 
-  const paymentMethods = [
-    { id: 'bank_transfer', name: 'Bank Transfer', icon: Building2 },
-    { id: 'cod', name: 'Cash on Delivery', icon: Banknote }
-  ]
-
   return (
     <div className="min-h-screen bg-black pt-24 pb-16">
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
 
-        <h1 className="text-3xl text-white mb-6">Checkout</h1>
+        <h1 className="text-white text-3xl mb-6">Checkout</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -175,35 +168,7 @@ export default function CheckoutPage() {
             onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
           />
 
-          {/* Payment */}
-          {paymentMethods.map((m) => (
-            <label key={m.id}>
-              <input
-                type="radio"
-                value={m.id}
-                checked={formData.paymentMethod === m.id}
-                onChange={(e) => setFormData({ ...formData, paymentMethod: e.target.value })}
-              />
-              {m.name}
-            </label>
-          ))}
-
-          {/* Bank */}
-          {formData.paymentMethod === 'bank_transfer' && (
-            <>
-              <input
-                placeholder="Transaction ID"
-                value={formData.transactionId}
-                onChange={(e) => setFormData({ ...formData, transactionId: e.target.value })}
-              />
-
-              <input type="file" onChange={handleImageUpload} />
-
-              {formData.paymentScreenshot && (
-                <img src={formData.paymentScreenshot} width={100} />
-              )}
-            </>
-          )}
+          <input type="file" onChange={handleImageUpload} />
 
           <button disabled={loading}>
             {loading ? 'Processing...' : 'Place Order'}

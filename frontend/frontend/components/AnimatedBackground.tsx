@@ -3,17 +3,8 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-interface Particle {
-  id: number
-  x: number
-  y: number
-  size: number
-  duration: number
-  delay: number
-}
-
 export default function AnimatedBackground() {
-  const [particles, setParticles] = useState<Particle[]>([])
+  const [particles, setParticles] = useState([])
 
   useEffect(() => {
     const generateParticles = () => {
