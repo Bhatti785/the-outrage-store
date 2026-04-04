@@ -17,7 +17,7 @@ export default function AnimatedBackground() {
 
   useEffect(() => {
     const generateParticles = () => {
-      const newParticles = []
+      const newParticles: Particle[] = []
       for (let i = 0; i < 50; i++) {
         newParticles.push({
           id: i,
