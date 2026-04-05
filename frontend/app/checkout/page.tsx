@@ -96,7 +96,7 @@ export default function CheckoutPage() {
 
     try {
       const token = localStorage.getItem('token')
-      const API_URL = process.env.NEXT_PUBLIC_API_URL
+      const API_URL = "https://the-outrage-store-production.up.railway.app/api"
 
       const orderData: any = {
         items: cart.map(item => ({
