@@ -282,7 +282,7 @@ const seedProducts = async () => {
     console.log(`   Kids: ${kidsCount} products`);
     console.log(`\n   Total Stock: ${products.reduce((sum, p) => sum + p.stock, 0)} items`);
     
-    console.log('\n👉 Visit: http://localhost:3000/products');
+    console.log('\n👉 Visit: https://the-outrage-store-wx4o-outrage1.vercel.app/products');
     process.exit(0);
   } catch (error) {
     console.error('❌ Error seeding products:', error.message);

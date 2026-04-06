@@ -17,7 +17,7 @@ const seedAdmin = async () => {
       console.log('\n✅ Admin already exists');
       console.log('Email:', adminEmail);
       console.log('Password:', adminPassword);
-      console.log('\nYou can log in at: http://localhost:3000/login');
+      console.log('\nYou can log in at: https://the-outrage-store-wx4o-outrage1.vercel.app/login');
       process.exit(0);
     }
     
@@ -37,8 +37,8 @@ const seedAdmin = async () => {
     console.log('\n✅ Admin created successfully!');
     console.log('Email:', adminEmail);
     console.log('Password:', adminPassword);
-    console.log('\n👉 Login at: http://localhost:3000/login');
-    console.log('👉 Admin panel: http://localhost:3000/admin');
+    console.log('\n👉 Login at: https://the-outrage-store-wx4o-outrage1.vercel.app/login');
+    console.log('👉 Admin panel: https://the-outrage-store-wx4o-outrage1.vercel.app/admin');
     
     process.exit(0);
   } catch (error) {
