@@ -13,8 +13,11 @@ connectDB();
 
 // ✅ Middleware
 app.use(cors({
-  origin: ['the-outrage-store-production.up.railway.app'],
-  credentials: false
+  origin: [
+    'http://localhost:3000',
+    'https://the-outrage-store-wx4o-outrage1.vercel.app'
+  ],
+  credentials: true
 }));
 
 app.use(express.json());
