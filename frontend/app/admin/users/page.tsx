@@ -26,7 +26,7 @@ export default function AdminUsers() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token')
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
       const res = await axios.get(`${API_URL}/users`, {
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -41,7 +41,7 @@ export default function AdminUsers() {
   const promoteUser = async (id: string) => {
     try {
       const token = localStorage.getItem('token')
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
       await axios.put(`${API_URL}/users/${id}/promote`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -57,7 +57,7 @@ export default function AdminUsers() {
     
     try {
       const token = localStorage.getItem('token')
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
       await axios.delete(`${API_URL}/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })

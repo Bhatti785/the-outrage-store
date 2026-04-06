@@ -32,7 +32,7 @@ export default function SalePage() {
   useEffect(() => {
     const fetchSaleProducts = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
         const res = await axios.get(`${API_URL}/products?isSale=true`)
         setProducts(res.data.products)
       } catch (error) {

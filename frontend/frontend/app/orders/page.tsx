@@ -44,7 +44,7 @@ export default function OrdersPage() {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token')
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
         
         const res = await axios.get(`${API_URL}/orders`, {
           headers: { Authorization: `Bearer ${token}` }

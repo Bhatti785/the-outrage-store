@@ -43,7 +43,7 @@ function ProductsContent() {
   const fetchProducts = async () => {
     setLoading(true)
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
       const params = new URLSearchParams()
       if (filters.category) params.append('category', filters.category)
       if (filters.minPrice) params.append('minPrice', filters.minPrice)
