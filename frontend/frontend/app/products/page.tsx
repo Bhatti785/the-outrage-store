@@ -43,14 +43,14 @@ function ProductsContent() {
   const fetchProducts = async () => {
     setLoading(true)
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
       const params = new URLSearchParams()
       if (filters.category) params.append('category', filters.category)
       if (filters.minPrice) params.append('minPrice', filters.minPrice)
       if (filters.maxPrice) params.append('maxPrice', filters.maxPrice)
       if (filters.isSale) params.append('isSale', 'true')
       
-      const res = await axios.get(`${API_URL}/products?${params}`)
+      const res = await axios.get(`${API_URL}/api/products?${params}`)
       setProducts(res.data.products)
     } catch (error) {
       toast.error('Failed to fetch products')
