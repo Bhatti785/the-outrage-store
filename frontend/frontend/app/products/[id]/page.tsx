@@ -39,8 +39,8 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
-        const res = await axios.get(`${API_URL}/products/${productId}`)
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
+        const res = await axios.get(`${API_URL}/api/products/${productId}`)
         setProduct(res.data.product)
         if (res.data.product.sizes?.length > 0) {
           setSelectedSize(res.data.product.sizes[0])

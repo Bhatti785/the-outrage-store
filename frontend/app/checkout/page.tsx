@@ -96,7 +96,7 @@ export default function CheckoutPage() {
 
     try {
       const token = localStorage.getItem('token')
-      const API_URL = "https://the-outrage-store-production.up.railway.app/api"
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
 
       const orderData: any = {
         items: cart.map(item => ({
@@ -122,7 +122,7 @@ export default function CheckoutPage() {
         orderData.paymentScreenshot = formData.paymentScreenshot
       }
 
-      await axios.post(`${API_URL}/orders`, orderData, {
+      await axios.post(`${API_URL}/api/orders`, orderData, {
         headers: { Authorization: `Bearer ${token}` }
       })
 

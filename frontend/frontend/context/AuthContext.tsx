@@ -20,7 +20,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchUser = async (token: string) => {
     try {
-      const res = await axios.get(`${API_URL}/auth/me`, {
+      const res = await axios.get(`${API_URL}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setUser(res.data.user)
@@ -49,13 +49,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const login = async (email: string, password: string) => {
-    const res = await axios.post(`${API_URL}/auth/login`, { email, password })
+    const res = await axios.post(`${API_URL}/api/auth/login`, { email, password })
     localStorage.setItem('token', res.data.token)
     setUser(res.data.user)
   }
 
   const register = async (name: string, email: string, password: string) => {
-    const res = await axios.post(`${API_URL}/auth/register`, { name, email, password })
+    const res = await axios.post(`${API_URL}/api/auth/register`, { name, email, password })
     localStorage.setItem('token', res.data.token)
     setUser(res.data.user)
   }

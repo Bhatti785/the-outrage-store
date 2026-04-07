@@ -44,8 +44,8 @@ export default function AdminOrders() {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem('token')
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
-      const res = await axios.get(`${API_URL}/orders`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
+      const res = await axios.get(`${API_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setOrders(res.data.orders)
@@ -59,8 +59,8 @@ export default function AdminOrders() {
   const updateStatus = async (id: string, status: string) => {
     try {
       const token = localStorage.getItem('token')
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
-      await axios.put(`${API_URL}/orders/${id}/status`, { orderStatus: status }, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
+      await axios.put(`${API_URL}/api/orders/${id}/status`, { orderStatus: status }, {
         headers: { Authorization: `Bearer ${token}` }
       })
       toast.success('Order status updated')
@@ -73,8 +73,8 @@ export default function AdminOrders() {
   const updatePaymentStatus = async (id: string, status: string) => {
     try {
       const token = localStorage.getItem('token')
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
-      await axios.put(`${API_URL}/orders/${id}/payment`, { paymentStatus: status }, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
+      await axios.put(`${API_URL}/api/orders/${id}/payment`, { paymentStatus: status }, {
         headers: { Authorization: `Bearer ${token}` }
       })
       toast.success('Payment status updated')

@@ -28,8 +28,8 @@ export default function NewArrivals() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
-        const res = await axios.get(`${API_URL}/products?isNew=true&limit=8`)
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
+        const res = await axios.get(`${API_URL}/api/products?isNew=true&limit=8`)
         setProducts(res.data.products)
       } catch (error) {
         console.error('Error fetching products:', error)
