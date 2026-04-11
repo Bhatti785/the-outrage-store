@@ -37,7 +37,7 @@ export default function LoginPage() {
       // Check if user is admin and redirect accordingly
       const token = localStorage.getItem('token')
       if (token) {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app'
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://the-outrage-store-production.up.railway.app/api'
         const res = await axios.get(`${API_URL}/api/auth/me`, {
           headers: { Authorization: `Bearer ${token}` }
         })
