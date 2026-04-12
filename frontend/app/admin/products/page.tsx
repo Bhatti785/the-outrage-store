@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Plus, Edit, Trash, Search } from 'lucide-react'
+import Link from 'next/link'
 import axios from 'axios'
 import Image from 'next/image'
 import toast from 'react-hot-toast'
@@ -13,6 +14,10 @@ interface Product {
   price: number
   stock: number
   category: string
+  brand: string
+  color: string[]
+  size: string[]
+  description: string
   images: string[]
   isNew: boolean
   isSale: boolean
@@ -74,10 +79,10 @@ export default function AdminProducts() {
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h1 className="font-serif text-3xl font-bold gold-text">Products</h1>
-        <button className="px-4 py-2 bg-gold-400 text-black font-semibold rounded-sm hover:bg-gold-500 transition-colors flex items-center gap-2">
+        <Link href="/admin/products/add" className="px-4 py-2 bg-gold-400 text-black font-semibold rounded-sm hover:bg-gold-500 transition-colors flex items-center gap-2">
           <Plus size={20} />
           Add Product
-        </button>
+        </Link>
       </div>
 
       <div className="glass rounded-lg p-4 mb-6">
@@ -99,9 +104,12 @@ export default function AdminProducts() {
             <thead className="bg-charcoal-800">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Product</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Brand</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Category</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Price</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Stock</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Colors</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Sizes</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Status</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Actions</th>
               </tr>
@@ -124,12 +132,49 @@ export default function AdminProducts() {
                           className="object-cover"
                         />
                       </div>
-                      <span className="text-white font-medium">{product.name}</span>
+                      <div>
+                        <span className="text-white font-medium">{product.name}</span>
+                        <span className="text-gray-400 text-sm block">{product.brand}</span>
+                      </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-gray-400 capitalize">{product.category}</td>
                   <td className="px-6 py-4 text-gold-400">${product.price}</td>
                   <td className="px-6 py-4 text-gray-400">{product.stock}</td>
+                  <td className="px-6 py-4">
+                    <div className="flex gap-1 flex-wrap">
+                      {product.color?.slice(0, 3).map((color, index) => (
+                        <span
+                          key={index}
+                          className="px-2 py-1 bg-gold-400/20 text-gold-400 text-xs rounded"
+                        >
+                          {color}
+                        </span>
+                      ))}
+                      {product.color?.length > 3 && (
+                        <span className="px-2 py-1 bg-gold-400/20 text-gold-400 text-xs rounded">
+                          +{product.color.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex gap-1 flex-wrap">
+                      {product.size?.slice(0, 4).map((size, index) => (
+                        <span
+                          key={index}
+                          className="px-2 py-1 bg-gold-400/20 text-gold-400 text-xs rounded"
+                        >
+                          {size}
+                        </span>
+                      ))}
+                      {product.size?.length > 4 && (
+                        <span className="px-2 py-1 bg-gold-400/20 text-gold-400 text-xs rounded">
+                          +{product.size.length - 4}
+                        </span>
+                      )}
+                    </div>
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       {product.isNew && (
