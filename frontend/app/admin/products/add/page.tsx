@@ -294,6 +294,7 @@ export default function AddProduct() {
                   ))}
                 </div>
               </div>
+            </div>
 
             {/* Sizes */}
             <div>
@@ -341,6 +342,7 @@ export default function AddProduct() {
                   ))}
                 </div>
               </div>
+            </div>
 
             {/* Images */}
             <div>
