@@ -38,15 +38,52 @@ exports.getProduct = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, category, price, oldPrice, stock, isNew, isSale } = req.body;
-    const images = req.files ? req.files.map(file => file.path) : [];
+    const { 
+      name, 
+      brand, 
+      description, 
+      category, 
+      price, 
+      stock, 
+      color, 
+      size, 
+      images, 
+      isNew, 
+      isSale 
+    } = req.body;
 
-    const product = await Product.create({
-      name, description, category, price, oldPrice, stock, images, isNew, isSale
-    });
+    // Handle both file uploads and image URLs
+    let productImages = [];
+    if (req.files && req.files.length > 0) {
+      // File uploads from Cloudinary
+      productImages = req.files.map(file => file.path);
+    } else if (images && Array.isArray(images)) {
+      // Image URLs from frontend
+      productImages = images.filter(url => url && url.trim() !== '');
+    }
+
+    // Map frontend fields to database schema
+    const productData = {
+      name,
+      brand,
+      description,
+      category,
+      price,
+      stock,
+      colors: Array.isArray(color) ? color : (color ? [color] : []),
+      sizes: Array.isArray(size) ? size : (size ? [size] : []),
+      images: productImages,
+      isNew: isNew || false,
+      isSale: isSale || false
+    };
+
+    console.log('Creating product with data:', JSON.stringify(productData, null, 2));
+    
+    const product = await Product.create(productData);
 
     res.status(201).json({ success: true, product });
   } catch (error) {
+    console.error('Product creation error:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
